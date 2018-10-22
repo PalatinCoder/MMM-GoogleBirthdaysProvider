@@ -1,0 +1,20 @@
+{
+  "name": "mmm-googlebirthdaysprovider",
+  "version": "0.0.1-alpha.1",
+  "private": true,
+  "description": "MagicMirror² Module to include your Google Contacts' birthdays into the default calendar",
+  "main": "MMM-GoogleBirthdaysProvider.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider.git"
+  },
+  "author": "Jan Syring-Lingenfelder",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/issues"
+  },
+  "homepage": "https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider#readme"
+}
