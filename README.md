@@ -6,7 +6,7 @@ A [MagicMirror²](https://magicmirror.builders/) helper to include the birthdays
 > This module is just a hello world at the moment, so stay tuned until it reaches it's first release
 
 [![GitHub tag](https://img.shields.io/github/tag/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/releases)
-[![Travis](https://img.shields.io/travis/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://travis-ci.org/PalatinCoder/MMM-GoogleBirthdaysProvider)
+[![Travis](https://img.shields.io/travis/com/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://travis-ci.com/PalatinCoder/MMM-GoogleBirthdaysProvider)
 [![License](https://img.shields.io/github/license/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/blob/master/LICENSE.md)
 
 ## Installation
