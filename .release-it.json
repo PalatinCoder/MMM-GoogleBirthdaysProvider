@@ -1,0 +1,12 @@
+{
+    "pkgFiles": ["package.json", "package-lock.json"],
+    "increment": "conventional:angular",
+    "src": {
+        "commitMessage": "chore(release): v%s",
+        "tagName": "v%s",
+        "tagAnnotation": "Release v%s"
+    },
+    "npm": {
+        "publish": false
+    }
+}

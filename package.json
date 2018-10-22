@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/issues"
   },
-  "homepage": "https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider#readme"
+  "homepage": "https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider#readme",
+  "devDependencies": {
+    "release-it": "^7.6.2"
+  }
 }
