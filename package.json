@@ -23,6 +23,7 @@
     "chai-http": "^4.2.0",
     "express": "^4.16.4",
     "mocha": "^5.2.0",
+    "mock-require": "^3.0.2",
     "release-it": "^7.6.2"
   },
   "dependencies": {

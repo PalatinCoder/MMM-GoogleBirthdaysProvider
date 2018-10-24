@@ -1,3 +1,7 @@
+const replace = require('mock-require');
+/* replace the base node_helper from MM, so the tests can run standalone */
+replace("node_helper", "./fixtures/node_helper.js");
+
 const NodeHelper = require("../node_helper");
 const chai = require('chai');
 const chaiHttp = require('chai-http');
