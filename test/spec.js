@@ -8,13 +8,15 @@ const chaiHttp = require('chai-http');
 const express = require('express');
 const expect = chai.expect;
 
+const REQUEST_URL = '/MMM-GoogleBirthdaysProvider';
+
 chai.use(chaiHttp);
 
 describe('GoogleBirthdaysProvider', function() {
     it('should be tested');
 });
 
-describe('the server', function() {
+describe('the public api', function() {
     var helper = new NodeHelper();
     before('set up the express app', () => {
         app = express();
@@ -25,17 +27,17 @@ describe('the server', function() {
     this.beforeEach('start the helper', () => { helper.start() });
     this.afterEach('stop the helper', () => { helper.stop() });
 
-    it('serves the correct url', done => {
+    it('is served at the correct url', done => {
         chai.request(helper.expressApp)
-            .get('/MMM-GoogleBirthdaysProvider')
+            .get(REQUEST_URL)
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 done();
         });
     });
-    it('serves the correct mime type and charset', done => {
+    it('has the correct mime type and charset', done => {
         chai.request(helper.expressApp)
-            .get('/MMM-GoogleBirthdaysProvider')
+            .get(REQUEST_URL)
             .end((err, res) => {
                 expect(res).to.have.header('content-type', 'text/calendar; charset=utf-8');
                 done();
