@@ -8,9 +8,5 @@ module.exports = NodeHelper.create({
         this.expressApp.use("/" + this.name, (req, res) => {
             ical.serve(res)
         })
-    },
-    socketNotificationReceived: function(notification, payload) {
-        console.log(this.name + " helper received socket notification: " + notification + " - Payload: " + payload)
-        this.sendSocketNotification("ECHO", notification)
-    },
+    }
 });
