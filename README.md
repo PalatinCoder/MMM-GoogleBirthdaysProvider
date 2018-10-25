@@ -18,6 +18,14 @@ The module reads the birthdays of your Google Contacts via Google's People API a
 1. In your `modules/` directory, `git clone https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider.git`
 2. `cd` in the new `MMM-GoogleBirthdaysProvider` directory
 3. `npm install --production` (note the production flag, so you don't get all the dev dependencies - you don't need them if you just want to use the module)
-4. Add `http://localhost:8080/mmm-googlebirthdaysprovider` to your calendar URLs
+4. Add the module to your `config.js`:
+   ```
+   {
+       module: "MMM-GoogleBirthdaysProvider",
+       config: {}
+   },
+   ```
+   Note: Don't give the module a position, as it doesn't render any DOM at all
 
-Note: Don't give the module a position, as it doesn't render any DOM at all
+5. Add `http://localhost:8080/mmm-googlebirthdaysprovider` to your calendar URLs
+
