@@ -11,16 +11,16 @@ var path = require("path");
 
 NodeHelper = Class.extend({
 	init: function() {
-		console.log("Initializing new module helper ...");
+		this._log("Initializing new module helper ...");
 	},
 
 	loaded: function(callback) {
-		console.log("Module helper loaded: " + this.name);
+		this._log("Module helper loaded: " + this.name);
 		callback();
 	},
 
 	start: function() {
-		console.log("Starting module helper: " + this.name);
+		this._log("Starting module helper: " + this.name);
 	},
 
 	/* stop()
@@ -30,7 +30,7 @@ NodeHelper = Class.extend({
 	 *
 	 */
 	stop: function() {
-		console.log("Stopping module helper: " + this.name);
+		this._log("Stopping module helper: " + this.name);
 	},
 
 	/* socketNotificationReceived(notification, payload)
@@ -40,7 +40,7 @@ NodeHelper = Class.extend({
 	 * argument payload mixed - The payload of the notification.
 	 */
 	socketNotificationReceived: function(notification, payload) {
-		console.log(this.name + " received a socket notification: " + notification + " - Payload: " + payload);
+		this._log(this.name + " received a socket notification: " + notification + " - Payload: " + payload);
 	},
 
 	/* setName(name)
@@ -94,7 +94,7 @@ NodeHelper = Class.extend({
 		var self = this;
 		self.io = io;
 
-		console.log("Connecting socket for: " + this.name);
+		this._log("Connecting socket for: " + this.name);
 		var namespace = this.name;
 		io.of(namespace).on("connection", function(socket) {
 			// add a catch all event.
@@ -109,12 +109,16 @@ NodeHelper = Class.extend({
 			// register catch all.
 			socket.on("*", function(notification, payload) {
 				if (notification !== "*") {
-					//console.log('received message in namespace: ' + namespace);
+					//this._log('received message in namespace: ' + namespace);
 					self.socketNotificationReceived(notification, payload);
 				}
 			});
 		});
 
+	},
+	// custom logger, is overriden in the actual module, to supress the console output in the tests
+	_log: function(message) {
+		console.log(message)
 	}
 });
 

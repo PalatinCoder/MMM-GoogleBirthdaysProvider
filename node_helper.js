@@ -16,6 +16,19 @@ module.exports = NodeHelper.create({
             ical.serve(res)
         })
 
-        console.log(this.name + ' server is running')
+        this._log('Server is running')
+    },
+
+	stop: function() {
+        this._log("Stopping helper");
+    },
+    
+
+    // custom logger utility to supress output in CI env
+    _log: function(message) {
+        if (process.env.NODE_ENV !== 'test') { console.log(`${this.name}: ${message}`) }
+    },
+    _error: function(message) {
+        if (process.env.NODE_ENV !== 'test') { console.error(`${this.name}: ${message}`) }
     }
 });
