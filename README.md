@@ -13,6 +13,8 @@ A [MagicMirror²](https://magicmirror.builders/) helper to include the birthdays
 
 The module reads the birthdays of your Google Contacts via Google's People API and exposes them as an iCal Feed through an internal URL, so you can include it in the default calendar.
 
+![Screenshot](screenshot.png)
+
 ## Installation
 
 1. In your `modules/` directory, `git clone https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider.git`
