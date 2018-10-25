@@ -7,6 +7,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const express = require('express');
 const expect = chai.expect;
+const ical = require('ical');
 
 const REQUEST_URL = '/MMM-GoogleBirthdaysProvider';
 
@@ -43,9 +44,17 @@ describe('the public api', function() {
                 done();
         });
     });
-});
-
-describe('the generated ical feed', function() {
-    it('has the correct timezone');
-    it('contains all events');
+    describe('the generated feed', function() {
+        // assert that the served iCal feed can be parsed
+        // the actual contents of the feed are unit-tested below
+        it('is a valid iCal feed', done => {
+            chai.request(helper.expressApp)
+                .get(REQUEST_URL)
+                .end((err, res) => {
+                    var data = ical.parseICS(res.text);
+                    expect(data).to.be.an('Object').that.is.not.empty;
+                    done();
+                });
+        });
+    })
 });
