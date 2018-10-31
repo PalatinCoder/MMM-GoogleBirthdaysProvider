@@ -1,10 +1,11 @@
 {
     "pkgFiles": ["package.json", "package-lock.json"],
     "increment": "conventional:angular",
+    "changelogCommand": "git log --pretty=format:\"* %s (%h)\" [REV_RANGE] | grep -E \"^\\* (feat|fix)\" || true",
     "src": {
         "commitMessage": "chore(release): v%s",
         "tagName": "v%s",
-        "tagAnnotation": "Release v%s"
+        "tagAnnotation": "Release v${version}\n\nThis release contains the following fixes and new features:\n${changelog}"
     },
     "npm": {
         "publish": false
