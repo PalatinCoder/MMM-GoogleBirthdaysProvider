@@ -20,6 +20,10 @@ describe('GoogleBirthdaysProvider', function() {
     it('should be tested');
 });
 
+describe('google-api-helper', () => {
+    it('should be tested, shouldn\' it?');
+});
+
 describe('the public api', function() {
     var helper = new NodeHelper();
     before('set up the express app', () => {
