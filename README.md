@@ -29,5 +29,22 @@ The module reads the birthdays of your Google Contacts via Google's People API a
    ```
    Note: Don't give the module a position, as it doesn't render any DOM at all
 
-5. Add `http://localhost:8080/mmm-googlebirthdaysprovider` to your calendar URLs
+5. Add `http://localhost:8080/mmm-googlebirthdaysprovider` to your calendar URLs, something like this:
+   ```
+   (...)
+		{
+			module: "calendar",
+			position: "top_left",
+			config: {
+				calendars: [
+					{
+						url: 'http://localhost:8080/mmm-googlebirthdaysprovider',
+						symbol: 'birthday-cake',
+						color: '#f00'
+					}
+				]
+			}
+		}
+   (...)
+   ```
 
