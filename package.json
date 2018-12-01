@@ -6,7 +6,8 @@
   "main": "MMM-GoogleBirthdaysProvider.js",
   "scripts": {
     "test": "mocha",
-    "release": "release-it"
+    "release": "release-it",
+    "token:generate": "node ./google-api-credentials/generate-auth-token.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "release-it": "^8.2.0"
   },
   "dependencies": {
+    "googleapis": "^35.0.0",
     "ical-generator": "^1.3.1"
   }
 }
