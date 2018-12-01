@@ -48,3 +48,8 @@ The module reads the birthdays of your Google Contacts via Google's People API a
    (...)
    ```
 
+## Known Limitations / Issues
+* Birthdays are only fetched once, when the node_helper is initialized. Should do that regularly
+* By now, all birthday events are set to the current year, thus you won't see next year's birthdays untils new years day
+* Only one google account is supported
+* there is no pagination implemented for the data returned by Google People API. Thus, the maximum number of contacts available is 2000 (hard limit on google's side).
