@@ -1,6 +1,16 @@
 const replace = require('mock-require');
 /* replace the base node_helper from MM, so the tests can run standalone */
 replace("node_helper", "./fixtures/node_helper.js");
+replace("../google-api-helper", {
+    getBirthdays: function(path) {
+        return new Promise((resolve, reject) => {
+            resolve([
+                { name: 'Johannes Testmann', birthday: { year: 1993, month: 09, day: 22 }},
+                { name: 'Elisabeth Testfrau', birthday: { year: 1991, month: 03, day: 06 }}
+            ]);
+        });
+    }
+});
 
 // set the env so that the console logging is supressed
 process.env.NODE_ENV = 'test';
