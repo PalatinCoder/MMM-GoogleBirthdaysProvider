@@ -29,8 +29,8 @@ module.exports = NodeHelper.create({
                                 hour: 0, minute: 0 , second: 0} );
             this.ical.createEvent({
                 start: date,
+                end: date,
                 summary: `${person.name} hat Geburtstag`,
-                allDay: true
             });
         });
     },
