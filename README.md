@@ -7,7 +7,7 @@ A [MagicMirror²](https://magicmirror.builders/) helper to include the birthdays
 [![License](https://img.shields.io/github/license/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/blob/master/LICENSE.md)
 
 > ## 🛠 Work in progress
-> The module is kind of a MVP (minimum viable product) at the moment. That means you can use it in your setup, but thins will definitely change on the way to v1.0.
+> The module is kind of a MVP (minimum viable product) at the moment. That means you can use it in your setup, but things will definitely change on the way to v1.0.
 > Also, be aware that there are some [known issues](#known-limitations--issues)! Use it with care 😉
 
 ## How it works
