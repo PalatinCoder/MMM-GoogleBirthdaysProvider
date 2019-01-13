@@ -26,7 +26,7 @@ module.exports = NodeHelper.create({
             var date = moment({ day: person.birthday.day,
                                 month: person.birthday.month - 1,
                                 // year: person.birthday.year,
-                                hour: 0, minute: 0 , second: 0} );
+                                hour: 12, minute: 0 , second: 0} );
             this.ical.createEvent({
                 start: date,
                 summary: `${person.name} hat Geburtstag`,
