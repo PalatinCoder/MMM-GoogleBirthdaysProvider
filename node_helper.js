@@ -32,7 +32,7 @@ module.exports = NodeHelper.create({
             this.ical.createEvent({
                 start: date,
                 repeating: person.birthday.year ? { freq: 'YEARLY' } : undefined, // repeat yearly if a year is set
-                summary: `${person.name} hat Geburtstag`,
+                summary: `${person.name}`,
                 allDay: true
             });
         });

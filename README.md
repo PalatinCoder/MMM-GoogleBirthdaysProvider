@@ -101,4 +101,3 @@ You should be redirected to the credentials overview
 * By now, all birthday events are set to the current year, thus you won't see next year's birthdays untils new years day
 * Only one google account is supported
 * there is no pagination implemented for the data returned by Google People API. Thus, the maximum number of contacts available is 2000 (hard limit on google's side).
-* The event title is hardcoded to german for now (sorry 🙈) However you could work around that by using the calendar's `titleReplace` config option
