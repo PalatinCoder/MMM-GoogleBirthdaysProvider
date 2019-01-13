@@ -1,6 +1,6 @@
 {
   "name": "mmm-googlebirthdaysprovider",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "MagicMirror² Module to include your Google Contacts' birthdays into the default calendar",
   "main": "MMM-GoogleBirthdaysProvider.js",
