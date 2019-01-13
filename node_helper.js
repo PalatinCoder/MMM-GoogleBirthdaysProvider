@@ -4,6 +4,8 @@ const icalGenerator = require("ical-generator")
 const apiHelper = require("./google-api-helper");
 
 module.exports = NodeHelper.create({
+    requiresVersion: '2.6.0', // 2.6.0 got a fix for recurring events before 1970, which is pretty usefull for birthdays :D
+
     start: function() {
 
         this._refreshData();
@@ -25,10 +27,11 @@ module.exports = NodeHelper.create({
         birthdays.forEach(person => {
             var date = moment({ day: person.birthday.day,
                                 month: person.birthday.month - 1,
-                                // year: person.birthday.year,
+                                year: person.birthday.year,
                                 hour: 12, minute: 0 , second: 0} );
             this.ical.createEvent({
                 start: date,
+                repeating: person.birthday.year ? { freq: 'YEARLY' } : undefined, // repeat yearly if a year is set
                 summary: `${person.name} hat Geburtstag`,
                 allDay: true
             });

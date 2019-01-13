@@ -68,10 +68,36 @@ You should be redirected to the credentials overview
 		}
    (...)
    ```
-8. That's it, now have fun 😉
+8. *(optional)* If you want to see which birthday it is, set the following: 
+   <details><summary>Config Options</summary>
+   <p>
+   Set `displayRepeatingCountTitle` to `true` and set the suffix for the count in the `repeatingCountTitle` in the calendar's options, like so:
+
+   ```
+   (...)
+		{
+			module: "calendar",
+			position: "top_left",
+			config: {
+				displayRepeatingCountTitle: true,
+				calendars: [
+					{
+						url: 'http://localhost:8080/mmm-googlebirthdaysprovider',
+						symbol: 'birthday-cake',
+						repeatingCountTitle: "Birthday"
+						color: '#f00'
+					}
+				]
+			}
+		}
+   (...)
+   ```
+   </p>
+9. That's it, now have fun 😉
 
 ## Known Limitations / Issues
 * Birthdays are only fetched once, when the node_helper is initialized. Should do that regularly
+* Birthdays which *don't have a year set* are automatically set to the current year (at the time of fetching the data). That means you won't see birthdays in January during December
 * By now, all birthday events are set to the current year, thus you won't see next year's birthdays untils new years day
 * Only one google account is supported
 * there is no pagination implemented for the data returned by Google People API. Thus, the maximum number of contacts available is 2000 (hard limit on google's side).
