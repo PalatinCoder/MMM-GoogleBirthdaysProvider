@@ -6,9 +6,16 @@ const apiHelper = require("./google-api-helper");
 module.exports = NodeHelper.create({
     requiresVersion: '2.6.0', // 2.6.0 got a fix for recurring events before 1970, which is pretty usefull for birthdays :D
 
+    config: {
+        refreshInterval: 0.5 * 60 * 60 * 24, // twice / day
+    },
+
     start: function() {
 
         this._refreshData();
+
+        var self = this;
+        this.refreshInterval = setInterval(()=>{ self._refreshData() }, this.config.refreshInterval);
 
         this.expressApp.use("/" + this.name, (req, res) => {
             this.ical.serve(res)
@@ -17,7 +24,7 @@ module.exports = NodeHelper.create({
         this._log('Server is running')
     },
 
-	stop: function() {
+    stop: function() {
         this._log("Stopping helper");
     },
     
