@@ -8,6 +8,7 @@ module.exports = NodeHelper.create({
 
     config: {
         refreshInterval: 0.5 * 60 * 60 * 24, // twice / day
+        showAge: true
     },
 
     start: function() {
@@ -32,6 +33,7 @@ module.exports = NodeHelper.create({
     
     _createIcalEvents: function(birthdays) {
         birthdays.forEach(person => {
+            var thisYear = new Date().getYear()+1900;
             var date = moment({ day: person.birthday.day,
                                 month: person.birthday.month - 1,
                                 year: person.birthday.year,
@@ -39,7 +41,7 @@ module.exports = NodeHelper.create({
             this.ical.createEvent({
                 start: date,
                 repeating: person.birthday.year ? { freq: 'YEARLY' } : undefined, // repeat yearly if a year is set
-                summary: `${person.name}`,
+                summary: `${person.name}` + (this.config.showAge && person.birthday.year ? ` (${thisYear - person.birthday.year})` : ''),
                 allDay: true
             });
         });
