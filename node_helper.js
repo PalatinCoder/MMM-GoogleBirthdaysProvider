@@ -25,7 +25,8 @@ module.exports = NodeHelper.create({
     
     _createIcalEvents: function(birthdays) {
         birthdays.forEach(person => {
-            var date = moment([person.birthday.year, person.birthday.month - 1, person.birthday.day]);
+            var year = person.birthday.year || new Date().getFullYear();
+            var date = moment([year, person.birthday.month - 1, person.birthday.day]);
             this.ical.createEvent({
                 start: date,
                 end: date.add(1,'day'),
