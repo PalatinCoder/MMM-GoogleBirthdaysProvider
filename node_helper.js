@@ -17,7 +17,7 @@ module.exports = NodeHelper.create({
         this._log('Server is running')
     },
 
-	stop: function() {
+    stop: function() {
         this._log("Stopping helper");
     },
     
@@ -25,12 +25,11 @@ module.exports = NodeHelper.create({
     
     _createIcalEvents: function(birthdays) {
         birthdays.forEach(person => {
-            var date = moment({ day: person.birthday.day,
-                                month: person.birthday.month - 1,
-                                year: person.birthday.year,
-                                hour: 12, minute: 0 , second: 0} );
+            var year = person.birthday.year || new Date().getFullYear();
+            var date = moment([year, person.birthday.month - 1, person.birthday.day]);
             this.ical.createEvent({
                 start: date,
+                end: date.add(1,'day'),
                 repeating: person.birthday.year ? { freq: 'YEARLY' } : undefined, // repeat yearly if a year is set
                 summary: `${person.name}`,
                 allDay: true
