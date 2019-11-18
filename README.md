@@ -84,7 +84,7 @@ You should be redirected to the credentials overview
 					{
 						url: 'http://localhost:8080/mmm-googlebirthdaysprovider',
 						symbol: 'birthday-cake',
-						repeatingCountTitle: "Birthday"
+						repeatingCountTitle: "Birthday",
 						color: '#f00'
 					}
 				]
