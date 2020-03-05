@@ -15,17 +15,44 @@ module.exports = NodeHelper.create({
         })
 
         this._log('Server is running')
+
+        // schedule data update
+	this.scheduleUpdate();
     },
 
-	stop: function() {
+    stop: function() {
         this._log("Stopping helper");
     },
-    
+
+    // schedule next update.
+    scheduleUpdate: function() {
+	let self = this;
+
+        // compute uodate intervall
+	let nextLoad = 1 * 3600 * 1000; // 1h
+	this._log(`Next update in ${nextLoad} milliseconds`);
+
+	// schedule net update
+	setTimeout(function() {
+		self._refreshData();
+		self.scheduleUpdate();
+	}, nextLoad);
+    },
+
     ical: icalGenerator({name: 'MMM-GoogleBirthdaysProvider', domain: 'mmm-googlebirthdaysprovider.local'}),
-    
+
     _createIcalEvents: function(birthdays) {
-        birthdays.forEach(person => {
-            var date = moment({ day: person.birthday.day,
+	if (typeof birthdays == "undefined" ) {
+                this._log("birthday list is undefined.");
+		return;
+        } else if (birthdays.length == 0) {
+                this._log("birthday list is empty.");
+		return;
+	}
+	this._log(`${birthdays.length} birthdays found.`);
+	this.ical.clear()
+	birthdays.forEach(person => {
+		var date = moment({ day: person.birthday.day,
                                 month: person.birthday.month - 1,
                                 year: person.birthday.year,
                                 hour: 12, minute: 0 , second: 0} );
@@ -39,15 +66,14 @@ module.exports = NodeHelper.create({
     },
 
     _refreshData: function() {
-        this.ical.clear();
         apiHelper.getBirthdays(this.path)
             .then(birthdays => this._createIcalEvents(birthdays))
             .catch(reason => {
                 // TODO: Show notification on the mirror ?
-                this._error(`API Helper error: ${reason.message}: ${reason.err || ''}`);
+                this._error(`_refreshData: ${reason.message}: ${reason.err || ''}`);
             });
     },
-    
+
     // custom logger utility to supress output in CI env
     _log: function(message) {
         if (process.env.NODE_ENV !== 'test') { console.log(`${this.name}: ${message}`) }
