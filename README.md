@@ -12,7 +12,7 @@ A [MagicMirror²](https://magicmirror.builders/) helper to include the birthdays
 
 ## How it works
 
-The module reads the birthdays of your Google Contacts via Google's People API and exposes them as an iCal Feed through an internal URL, so you can include it in the default calendar.
+The module reads the birthdays of your Google Contacts via Google's People API and exposes them as an iCal Feed through an internal URL, so you can include it in the default calendar. The list of birthdays is updated every hour.
 
 ![Screenshot](screenshot.png)
 
@@ -68,7 +68,7 @@ You should be redirected to the credentials overview
 		}
    (...)
    ```
-8. *(optional)* If you want to see which birthday it is, set the following: 
+8. *(optional)* If you want to see which birthday it is, set the following:
    <details><summary>Config Options</summary>
    <p>
    Set `displayRepeatingCountTitle` to `true` and set the suffix for the count in the `repeatingCountTitle` in the calendar's options, like so:
@@ -96,7 +96,6 @@ You should be redirected to the credentials overview
 9. That's it, now have fun 😉
 
 ## Known Limitations / Issues
-* Birthdays are only fetched once, when the node_helper is initialized. Should do that regularly
 * Birthdays which *don't have a year set* are automatically set to the current year (at the time of fetching the data). That means you won't see birthdays in January during December
 * By now, all birthday events are set to the current year, thus you won't see next year's birthdays untils new years day
 * Only one google account is supported
