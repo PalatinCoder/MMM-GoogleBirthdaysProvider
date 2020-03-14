@@ -17,7 +17,7 @@ module.exports = NodeHelper.create({
         this._log('Server is running')
 
         // schedule data update
-	this.scheduleUpdate();
+        this.scheduleUpdate();
     },
 
     stop: function() {
@@ -26,33 +26,33 @@ module.exports = NodeHelper.create({
 
     // schedule next update.
     scheduleUpdate: function() {
-	let self = this;
+        let self = this;
 
         // compute uodate intervall
-	let nextLoad = 1 * 3600 * 1000; // 1h
-	this._log(`Next update in ${nextLoad} milliseconds`);
+        let nextLoad = 1 * 3600 * 1000; // 1h
+        this._log(`Next update in ${nextLoad} milliseconds`);
 
-	// schedule net update
-	setTimeout(function() {
-		self._refreshData();
-		self.scheduleUpdate();
-	}, nextLoad);
+        // schedule net update
+        setTimeout(function() {
+            self._refreshData();
+            self.scheduleUpdate();
+        }, nextLoad);
     },
 
     ical: icalGenerator({name: 'MMM-GoogleBirthdaysProvider', domain: 'mmm-googlebirthdaysprovider.local'}),
 
     _createIcalEvents: function(birthdays) {
-	if (typeof birthdays == "undefined" ) {
-                this._log("birthday list is undefined.");
-		return;
+        if (typeof birthdays == "undefined" ) {
+            this._log("birthday list is undefined.");
+            return;
         } else if (birthdays.length == 0) {
-                this._log("birthday list is empty.");
-		return;
-	}
-	this._log(`${birthdays.length} birthdays found.`);
-	this.ical.clear()
-	birthdays.forEach(person => {
-		var date = moment({ day: person.birthday.day,
+            this._log("birthday list is empty.");
+            return;
+        }
+        this._log(`${birthdays.length} birthdays found.`);
+        this.ical.clear()
+        birthdays.forEach(person => {
+            var date = moment({ day: person.birthday.day,
                                 month: person.birthday.month - 1,
                                 year: person.birthday.year,
                                 hour: 12, minute: 0 , second: 0} );
@@ -78,6 +78,7 @@ module.exports = NodeHelper.create({
     _log: function(message) {
         if (process.env.NODE_ENV !== 'test') { console.log(`${this.name}: ${message}`) }
     },
+
     _error: function(message) {
         if (process.env.NODE_ENV !== 'test') { console.error(`${this.name}: ${message}`) }
     }
