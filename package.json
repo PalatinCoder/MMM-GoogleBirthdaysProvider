@@ -31,6 +31,6 @@
   "dependencies": {
     "googleapis": "^36.0.0",
     "ical-generator": "^1.4.3",
-    "moment": "^2.23.0"
+    "moment": "^2.29.2"
   }
 }
