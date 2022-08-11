@@ -1,10 +1,10 @@
-# MMM-CardDavBirthdaysProvider
-[MMM-GoogleBirthdaysProvider](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider. 
-https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider
+[![License](https://img.shields.io/github/license/ulrichwisser/MMM-CardDavBirthdaysProvider.svg?style=flat-square)](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/blob/master/LICENSE.md)
 
-[![GitHub tag](https://img.shields.io/github/tag/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/releases)
-[![Travis](https://img.shields.io/travis/com/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://travis-ci.com/PalatinCoder/MMM-GoogleBirthdaysProvider)
-[![License](https://img.shields.io/github/license/PalatinCoder/MMM-GoogleBirthdaysProvider.svg?style=flat-square)](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/blob/master/LICENSE.md)
+# MMM-CardDavBirthdaysProvider
+Forked from [MMM-GoogleBirthdaysProvider](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider). 
+
+A *big* thank you to PalatinCoder for the original code.
+
 
 > ## 🛠 Work in progress
 > Please open an issue or cantact me with any questions or error reports.
