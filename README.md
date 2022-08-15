@@ -23,51 +23,52 @@ The module extracts birthdays from a Cardav feed and exposes them as an iCal Fee
 2. `cd` in the new `MMM-CardDavBirthdaysProvider` directory
 3. `npm install --production` (note the production flag, so you don't get all the dev dependencies - you don't need them if you just want to use the module)
 6. Add the module to your `config.js`:
-   	```
-   	{
-    	module: "MMM-CardDavBirthdaysProvider",
-		position: "top_left",
-       	config: {
-        authMethod: 'Basic',
-        serverUrl: 'https://secure.carddav.example/',
-        credentials: {
-            username: 'username',
-            password: 'password',
-        },
-		}
-   	},
-	```
-   	Note: the module does not display anything. So you can chose any position of your liking. 
+```
+{
+	module: "MMM-CardDavBirthdaysProvider",
+	position: "top_left",
+	config: {
+		authMethod: 'Basic',
+		serverUrl: 'https://secure.carddav.example/',
+		credentials: {
+			username: 'username',
+			password: 'password',
+		},
+	},
+},
+```
 
-	MMM-CardDavBirthdaysProvider uses (tsdav)[https://www.npmjs.com/package/tsdav] from npm.io to retrieve carddav data. Please check the tsdav documentation for details on the credentials.
+Note: the module does not display anything. So you can chose any position of your liking. 
 
-	config should have three attributes "authMethod", "serverURL" and "credentials".
+MMM-CardDavBirthdaysProvider uses (tsdav)[https://www.npmjs.com/package/tsdav] from npm.io to retrieve carddav data. Please check the tsdav documentation for details on the credentials.
 
-	E.g
-	```
-	config : {
-        authMethod: 'Basic',
-        serverUrl: 'https://secure.carddav.example/',
-        credentials: {
-            username: 'username',
-            password: 'password',
-        },
-	}
-   	```
-	or
-	```
-	config : {
-		authMethod: 'Oauth',	
-		serverUrl: 'https://apidata.googleusercontent.com/caldav/v2/',
-  		credentials: {
-    		tokenUrl: 'https://accounts.google.com/o/oauth2/token',
-    		username: 'YOUR_EMAIL_ADDRESS',
-    		refreshToken: 'YOUR_REFRESH_TOKEN_WITH_CALDAV_PERMISSION',
-    		clientId: 'YOUR_CLIENT_ID',
-    		clientSecret: 'YOUR_CLIENT_SECRET',
-  		},
-  	}
-   	```
+config should have three attributes "authMethod", "serverURL" and "credentials".
+
+E.g
+```
+config : {
+	authMethod: 'Basic',
+	serverUrl: 'https://secure.carddav.example/',
+	credentials: {
+		username: 'username',
+		password: 'password',
+	},
+},
+```
+or
+```
+config : {
+	authMethod: 'Oauth',	
+	serverUrl: 'https://apidata.googleusercontent.com/caldav/v2/',
+	credentials: {
+		tokenUrl: 'https://accounts.google.com/o/oauth2/token',
+		username: 'YOUR_EMAIL_ADDRESS',
+		refreshToken: 'YOUR_REFRESH_TOKEN_WITH_CALDAV_PERMISSION',
+		clientId: 'YOUR_CLIENT_ID',
+		clientSecret: 'YOUR_CLIENT_SECRET',
+	},
+},
+```
 
 7. Add `http://localhost:8080/mmm-carddavbirthdaysprovider` to your calendar URLs, something like this:
    ```
