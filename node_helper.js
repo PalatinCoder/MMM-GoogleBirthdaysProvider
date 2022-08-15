@@ -1,7 +1,9 @@
-var NodeHelper = require("node_helper")
-const moment = require("moment")
-const icalGenerator = require("ical-generator")
-const apiHelper = require("./google-api-helper");
+var NodeHelper = require("node_helper");
+const moment = require("moment");
+const icalGenerator = require("ical-generator");
+const dav = require("tsdav")
+var util = require('util');
+var vCard = require('vcard');
 
 module.exports = NodeHelper.create({
     requiresVersion: '2.6.0', // 2.6.0 got a fix for recurring events before 1970, which is pretty usefull for birthdays :D
@@ -17,7 +19,9 @@ module.exports = NodeHelper.create({
         this._log('Server is running')
 
         // schedule data update
-        this.scheduleUpdate();
+        //this.scheduleUpdate();
+        this.started = false;
+        this.config = {};
     },
 
     stop: function() {
@@ -39,10 +43,25 @@ module.exports = NodeHelper.create({
         }, nextLoad);
     },
 
-    ical: icalGenerator({name: 'MMM-GoogleBirthdaysProvider', domain: 'mmm-googlebirthdaysprovider.local'}),
+    socketNotificationReceived: function(notification, payload) {
+        const self = this;
+        this._log("SOCKET NOTIFICATION " + notification);
+        console.log(util.inspect(payload));
+        if (notification === 'CONFIG' && this.started == false) {
+		    this.config = payload;	     
+		    this.started = true;
+		    self.scheduleUpdate();
+            self._refreshData();
+        };
+    },
+
+    ical: icalGenerator({
+        name: 'MMM-CardDavBirthdaysProvider',
+        domain: 'mmm-carddavbirthdaysprovider.local'
+    }),
 
     _createIcalEvents: function(birthdays) {
-        if (typeof birthdays == "undefined" ) {
+        if (typeof birthdays == "undefined") {
             this._log("birthday list is undefined.");
             return;
         } else if (birthdays.length == 0) {
@@ -51,22 +70,135 @@ module.exports = NodeHelper.create({
         }
         this._log(`${birthdays.length} birthdays found.`);
         this.ical.clear()
+        now = moment();
         birthdays.forEach(person => {
-            var date = moment({ day: person.birthday.day,
-                                month: person.birthday.month - 1,
-                                year: person.birthday.year,
-                                hour: 12, minute: 0 , second: 0} );
             this.ical.createEvent({
-                start: date,
-                repeating: person.birthday.year ? { freq: 'YEARLY' } : undefined, // repeat yearly if a year is set
-                summary: `${person.name}`,
+                start: person.birthday,
+                repeating: person.birthday.year() < now.year() ? { freq: 'YEARLY' } : undefined,
+                summary: person.name,
                 allDay: true
             });
         });
     },
 
+    _bday2date: function(bday) {
+        day   = 0;
+        month = 0;
+        year  = 0;
+        if (typeof(bday) == "string") {
+            parts = bday.split(/\D+/);
+            console.log("PARTS "+util.inspect(parts));
+            if (parts.length == 3) {
+                year = parts[0];
+                month=parts[1];
+                day=parts[2];
+            } else if (parts.length == 2) {
+                month=parts[0];
+                day=parts[1];
+                now = moment();
+                year = now.year;
+            } else if (parts.length == 1) {
+                if (parts[0].length == 8) {
+                    year = parts[0].slice(0,4);
+                    month = parts[0].slice(4,6);
+                    day = parts[0].slice(6,8);
+                } else {
+                    console.log("Part does not look like a date " + parts[0]);
+                    return;
+                }
+            } else{
+                console.log("BDAY has "+parts.length+" parts");
+                return;
+            }
+        } else if (typeof(bday) == "object") {
+            return this._bday2date(bday.value);
+        } else {
+            console.log("Found BDAY of type " + typeof(bday));
+            return;
+        }
+
+        // birthdays without a year get assigned year 1604 by Apple.
+        // we will treat any year before 1900 as "no year"
+        if (year < 1900) {
+            now = moment();
+            if (month-1 < now.month() ) { 
+                year = now.year()+1;
+            } else {
+                year = now.year();
+            }
+        }
+
+        var date = moment({
+            day: day,
+            month: month - 1,
+            year: year,
+            hour: 12,
+            minute: 0,
+            second: 0
+        });
+        console.log("BDAY2DATE( " + bday + " ) = " + year + "-" + month + "-" + day + "  " + util.inspect(date));
+
+        return date;
+    },
+
+    _getBirthdays: function() {
+        return new Promise((resolve, reject) => {
+            this._log("_getBirthdays");
+            self = this;
+
+            birthdays = [];
+
+            (async () => {
+                const client = new dav.DAVClient({
+                    serverUrl:   self.config.serverUrl,
+                    credentials: self.config.credentials,
+                    authMethod:  self.config.authMethod,
+                    defaultAccountType: 'carddav',
+                });
+    
+    
+                this._log("client login");
+                await client.login();
+                
+                const addressBooks = await client.fetchAddressBooks();
+    
+                for (let i = 0; i < addressBooks.length; i++) {
+                    //console.log('Found address book name ' + addressBook.displayName);
+                    const vcards = await client.fetchVCards({addressBook: addressBooks[i], });
+                    for (let j = 0; j < vcards.length; j++) {
+                        var card = new vCard();
+                        card.readData(vcards[j].data, function(errstr, json) {
+                            if (errstr !== null) {
+                                console.log("ERROR card.readData  " + errstr);
+                                return;
+                            }
+                            if (json['BDAY']) {
+                                birthdays.push({
+                                    name: json['FN'],
+                                    birthday: self._bday2date(json['BDAY']),
+                                    book: addressBooks[i].displayName
+                                });
+                            }
+                        });
+                    };
+                };
+                birthdays.forEach( bday => { console.log(bday.book + ": " + bday.name+" "+util.inspect(bday.birthday));});
+                console.log("RESOLVE");
+                resolve(birthdays);
+            })();
+
+        }).catch(reason => {
+            reject({
+                message: 'Error',
+                err: reason
+            });
+        });
+
+    },
+
     _refreshData: function() {
-        apiHelper.getBirthdays(this.path)
+        if (!this.started) { this._log("no data refresh, not started."); return; }
+        this._getBirthdays()
             .then(birthdays => this._createIcalEvents(birthdays))
             .catch(reason => {
                 // TODO: Show notification on the mirror ?
@@ -76,10 +208,10 @@ module.exports = NodeHelper.create({
 
     // custom logger utility to supress output in CI env
     _log: function(message) {
-        if (process.env.NODE_ENV !== 'test') { console.log(`${this.name}: ${message}`) }
+        console.log(`${this.name}: ${message}`);
     },
 
     _error: function(message) {
-        if (process.env.NODE_ENV !== 'test') { console.error(`${this.name}: ${message}`) }
+        console.error(`${this.name}: ${message}`);
     }
 });
