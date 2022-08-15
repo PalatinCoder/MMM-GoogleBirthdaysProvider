@@ -1,6 +1,8 @@
 BSD 3-Clause License
 
 Copyright (c) 2018, Jan Syring-Lingenfelder
+Copyright (c) 2022, Ulrich Wisser
+
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
