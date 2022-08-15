@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/github/license/ulrichwisser/MMM-CardDavBirthdaysProvider.svg?style=flat-square)](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/blob/master/LICENSE.md)
+[![License](https://img.shields.io/github/license/ulrichwisser/MMM-CardDavBirthdaysProvider.svg?style=flat-square)](https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider/blob/master/LICENSE.md)
 
 # MMM-CardDavBirthdaysProvider
 Forked from [MMM-GoogleBirthdaysProvider](https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider). 
@@ -23,13 +23,51 @@ The module extracts birthdays from a Cardav feed and exposes them as an iCal Fee
 2. `cd` in the new `MMM-CardDavBirthdaysProvider` directory
 3. `npm install --production` (note the production flag, so you don't get all the dev dependencies - you don't need them if you just want to use the module)
 6. Add the module to your `config.js`:
-   ```
-   {
-       module: "MMM-CardDavBirthdaysProvider",
-       config: {}
-   },
-   ```
-   Note: Don't give the module a position, as it doesn't render any DOM at all
+   	```
+   	{
+    	module: "MMM-CardDavBirthdaysProvider",
+		position: "top_left",
+       	config: {
+        authMethod: 'Basic',
+        serverUrl: 'https://secure.carddav.example/',
+        credentials: {
+            username: 'username',
+            password: 'password',
+        },
+		}
+   	},
+	```
+   	Note: the module does not display anything. So you can chose any position of your liking. 
+
+	MMM-CardDavBirthdaysProvider uses (tsdav)[https://www.npmjs.com/package/tsdav] from npm.io to retrieve carddav data. Please check the tsdav documentation for details on the credentials.
+
+	config should have three attributes "authMethod", "serverURL" and "credentials".
+
+	E.g
+	```
+	config : {
+        authMethod: 'Basic',
+        serverUrl: 'https://secure.carddav.example/',
+        credentials: {
+            username: 'username',
+            password: 'password',
+        },
+	}
+   	```
+	or
+	```
+	config : {
+		authMethod: 'Oauth',	
+		serverUrl: 'https://apidata.googleusercontent.com/caldav/v2/',
+  		credentials: {
+    		tokenUrl: 'https://accounts.google.com/o/oauth2/token',
+    		username: 'YOUR_EMAIL_ADDRESS',
+    		refreshToken: 'YOUR_REFRESH_TOKEN_WITH_CALDAV_PERMISSION',
+    		clientId: 'YOUR_CLIENT_ID',
+    		clientSecret: 'YOUR_CLIENT_SECRET',
+  		},
+  	}
+   	```
 
 7. Add `http://localhost:8080/mmm-carddavbirthdaysprovider` to your calendar URLs, something like this:
    ```
@@ -40,7 +78,7 @@ The module extracts birthdays from a Cardav feed and exposes them as an iCal Fee
 			config: {
 				calendars: [
 					{
-						url: 'http://localhost:8080/mmm-googlebirthdaysprovider',
+						url: 'http://localhost:8080/mmm-carddavbirthdaysprovider',
 						symbol: 'birthday-cake',
 						color: '#f00'
 					}
@@ -63,7 +101,7 @@ The module extracts birthdays from a Cardav feed and exposes them as an iCal Fee
 				displayRepeatingCountTitle: true,
 				calendars: [
 					{
-						url: 'http://localhost:8080/mmm-googlebirthdaysprovider',
+						url: 'http://localhost:8080/mmm-carddavbirthdaysprovider',
 						symbol: 'birthday-cake',
 						repeatingCountTitle: "Birthday"
 						color: '#f00'
@@ -77,5 +115,3 @@ The module extracts birthdays from a Cardav feed and exposes them as an iCal Fee
 9. That's it, now have fun 😉
 
 ## Known Limitations / Issues
-* Birthdays which *don't have a year set* are automatically set to the current year (at the time of fetching the data). That means you won't see birthdays in January during December
-* By now, all birthday events are set to the current year, thus you won't see next year's birthdays untils new years day
