@@ -45,10 +45,8 @@ module.exports = NodeHelper.create({
 
     socketNotificationReceived: function(notification, payload) {
         const self = this;
-        this._log("SOCKET NOTIFICATION " + notification);
-        console.log(util.inspect(payload));
         if (notification === 'CONFIG' && this.started == false) {
-		    this.config = payload;	     
+		    this.config = payload;
 		    this.started = true;
 		    self.scheduleUpdate();
             self._refreshData();
@@ -143,7 +141,6 @@ module.exports = NodeHelper.create({
 
     _getBirthdays: function() {
         return new Promise((resolve, reject) => {
-            this._log("_getBirthdays");
             self = this;
 
             birthdays = [];
@@ -155,13 +152,11 @@ module.exports = NodeHelper.create({
                     authMethod:  self.config.authMethod,
                     defaultAccountType: 'carddav',
                 });
-    
-    
-                this._log("client login");
+
                 await client.login();
-                
+
                 const addressBooks = await client.fetchAddressBooks();
-    
+
                 for (let i = 0; i < addressBooks.length; i++) {
                     //console.log('Found address book name ' + addressBook.displayName);
                     const vcards = await client.fetchVCards({addressBook: addressBooks[i], });
