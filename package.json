@@ -22,8 +22,8 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "express": "^4.16.4",
-    "ical": "^0.5.0",
+    "express": "^4.18.2",
+    "ical": "^0.8.0",
     "mocha": "^5.2.0",
     "mock-require": "^3.0.2",
     "release-it": "^9.7.0"
