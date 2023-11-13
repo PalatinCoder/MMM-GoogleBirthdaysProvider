@@ -2,7 +2,7 @@
   "name": "mmm-carddavbirthdaysprovider",
   "version": "0.1.0",
   "private": true,
-  "description": "MagicMirror² Module to include your CardDav Contacts' birthdays into the default calendar",
+  "description": "MagicMirror² module to include your CardDav Contacts' birthdays into the default calendar.",
   "main": "MMM-CardDavBirthdaysProvider.js",
   "repository": {
     "type": "git",
