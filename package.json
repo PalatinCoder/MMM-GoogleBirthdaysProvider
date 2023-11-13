@@ -14,7 +14,12 @@
     "url": "https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider/issues"
   },
   "homepage": "https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider",
+  "scripts": {
+    "prettier:fix": "prettier --write .",
+    "test": "prettier --check ."
+  },
   "devDependencies": {
+    "prettier": "^3.0.3"
   },
   "dependencies": {
     "ical-generator": "^1.4.3",
