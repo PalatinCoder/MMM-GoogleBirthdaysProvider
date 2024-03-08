@@ -1,54 +1,54 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "npm",
-            "label": "Tests",
-            "script": "test",
-            "problemMatcher": [],
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "Release",
-            "type": "shell",
-            "options": {
-                "shell": { "executable": "C:\\WINDOWS\\system32\\wsl.exe" }
-            },
-            "command": "npm run release",
-            "problemMatcher": []
-        },
-        {
-            "label": "Release alpha",
-            "type": "shell",
-            "options": {
-                "shell": { "executable": "C:\\WINDOWS\\system32\\wsl.exe" }
-            },
-            "command": "npm run release -- --preRelease=alpha",
-            "problemMatcher": []
-        },
-        {
-            "label": "Release beta",
-            "type": "shell",
-            "options": {
-                "shell": { "executable": "C:\\WINDOWS\\system32\\wsl.exe" }
-            },
-            "command": "npm run release -- --preRelease=beta",
-            "problemMatcher": []
-        },
-        {
-            "label": "Run MagicMirror",
-            "type": "shell",
-            "command": "npm run start-dev",
-            "options": {
-                "cwd": "${workspaceFolder}/../../"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "label": "Tests",
+      "script": "test",
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Release",
+      "type": "shell",
+      "options": {
+        "shell": { "executable": "C:\\WINDOWS\\system32\\wsl.exe" }
+      },
+      "command": "npm run release",
+      "problemMatcher": []
+    },
+    {
+      "label": "Release alpha",
+      "type": "shell",
+      "options": {
+        "shell": { "executable": "C:\\WINDOWS\\system32\\wsl.exe" }
+      },
+      "command": "npm run release -- --preRelease=alpha",
+      "problemMatcher": []
+    },
+    {
+      "label": "Release beta",
+      "type": "shell",
+      "options": {
+        "shell": { "executable": "C:\\WINDOWS\\system32\\wsl.exe" }
+      },
+      "command": "npm run release -- --preRelease=beta",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run MagicMirror",
+      "type": "shell",
+      "command": "npm run start-dev",
+      "options": {
+        "cwd": "${workspaceFolder}/../../"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
 }

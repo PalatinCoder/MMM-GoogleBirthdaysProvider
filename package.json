@@ -2,7 +2,7 @@
   "name": "mmm-carddavbirthdaysprovider",
   "version": "0.1.0",
   "private": true,
-  "description": "MagicMirror² Module to include your CardDav Contacts' birthdays into the default calendar",
+  "description": "MagicMirror² module to include your CardDav Contacts' birthdays into the default calendar.",
   "main": "MMM-CardDavBirthdaysProvider.js",
   "repository": {
     "type": "git",
@@ -14,13 +14,17 @@
     "url": "https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider/issues"
   },
   "homepage": "https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider",
+  "scripts": {
+    "prettier:fix": "prettier --write .",
+    "test": "prettier --check ."
+  },
   "devDependencies": {
+    "prettier": "^3.0.3"
   },
   "dependencies": {
     "ical-generator": "^1.4.3",
     "moment": "^2.23.0",
     "tsdav": "^2.0.3",
-    "vcard": "^0.1.0",
-
+    "vcard": "^0.1.0"
   }
 }
