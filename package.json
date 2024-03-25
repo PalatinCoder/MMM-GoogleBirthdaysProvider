@@ -18,6 +18,11 @@
     "prettier:fix": "prettier --write .",
     "test": "prettier --check ."
   },
+   "keywords": [
+    "MagicMirror",
+    "Google",
+    "Calendar"
+  ],
   "devDependencies": {
     "prettier": "^3.0.3"
   },
