@@ -1,36 +1,35 @@
 {
-  "name": "mmm-googlebirthdaysprovider",
-  "version": "0.2.0",
+  "name": "mmm-carddavbirthdaysprovider",
+  "version": "0.1.0",
   "private": true,
-  "description": "MagicMirror² Module to include your Google Contacts' birthdays into the default calendar",
-  "main": "MMM-GoogleBirthdaysProvider.js",
-  "scripts": {
-    "test": "mocha",
-    "release": "release-it",
-    "token:generate": "node ./google-api-credentials/generate-auth-token.js"
-  },
+  "description": "MagicMirror² module to include your CardDav Contacts' birthdays into the default calendar.",
+  "main": "MMM-CardDavBirthdaysProvider.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider.git"
+    "url": "git+https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider.git"
   },
-  "author": "Jan Syring-Lingenfelder",
+  "author": "Jan Syring-Lingenfelder, Ulrich Wisser",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider/issues"
+    "url": "https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider/issues"
   },
-  "homepage": "https://github.com/PalatinCoder/MMM-GoogleBirthdaysProvider#readme",
+  "homepage": "https://github.com/ulrichwisser/MMM-CardDavBirthdaysProvider",
+  "scripts": {
+    "prettier:fix": "prettier --write .",
+    "test": "prettier --check ."
+  },
+   "keywords": [
+    "MagicMirror",
+    "Google",
+    "Calendar"
+  ],
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.2.1",
-    "express": "^4.16.4",
-    "ical": "^0.5.0",
-    "mocha": "^5.2.0",
-    "mock-require": "^3.0.2",
-    "release-it": "^9.7.0"
+    "prettier": "^3.0.3"
   },
   "dependencies": {
-    "googleapis": "^36.0.0",
     "ical-generator": "^1.4.3",
-    "moment": "^2.23.0"
+    "moment": "^2.23.0",
+    "tsdav": "^2.0.3",
+    "vcard": "^0.1.0"
   }
 }

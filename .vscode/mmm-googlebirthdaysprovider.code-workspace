@@ -1,11 +1,11 @@
 {
-	"folders": [
-		{
-			"path": "../"
-		}
-	],
-	"settings": {
-		"files.insertFinalNewline": true,
-		"files.eol": "\n"
-	}
+  "folders": [
+    {
+      "path": "../"
+    }
+  ],
+  "settings": {
+    "files.insertFinalNewline": true,
+    "files.eol": "\n"
+  }
 }
